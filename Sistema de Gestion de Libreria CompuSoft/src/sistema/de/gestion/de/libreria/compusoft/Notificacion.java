@@ -9,5 +9,5 @@ package sistema.de.gestion.de.libreria.compusoft;
  * @author jodav
  */
 public abstract class Notificacion {
-        public abstract void enviarMensaje();
+        public abstract void enviarMensaje(String txt);
 }
