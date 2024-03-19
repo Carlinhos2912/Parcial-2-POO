@@ -39,7 +39,6 @@ public class main extends javax.swing.JFrame {
         setAlwaysOnTop(true);
         setMaximumSize(new java.awt.Dimension(1344, 756));
         setMinimumSize(new java.awt.Dimension(1344, 756));
-        setPreferredSize(new java.awt.Dimension(1344, 756));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -91,14 +90,10 @@ public class main extends javax.swing.JFrame {
         background.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 230, 230, 300));
 
         lblBookInfoHolder.setIcon(new javax.swing.ImageIcon(getClass().getResource("/FrontEnd/media/bookInfoHolder.png"))); // NOI18N
-        lblBookInfoHolder.setMaximumSize(new java.awt.Dimension(660, 420));
-        lblBookInfoHolder.setMinimumSize(new java.awt.Dimension(660, 420));
-        lblBookInfoHolder.setPreferredSize(new java.awt.Dimension(660, 420));
         background.add(lblBookInfoHolder, new org.netbeans.lib.awtextra.AbsoluteConstraints(342, 180, 660, 420));
 
         jButton1.setBackground(new java.awt.Color(255, 189, 89));
         jButton1.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 40)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
         jButton1.setText("<");
         jButton1.setBorder(null);
         jButton1.setFocusable(false);
@@ -115,7 +110,6 @@ public class main extends javax.swing.JFrame {
 
         jButton2.setBackground(new java.awt.Color(255, 189, 89));
         jButton2.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 40)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(0, 0, 0));
         jButton2.setText(">");
         jButton2.setBorder(null);
         jButton2.setFocusable(false);
