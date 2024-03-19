@@ -9,8 +9,9 @@ package sistema.de.gestion.de.libreria.compusoft;
  * @author jodav
  */
 public class NotificaciónEmail extends Notificacion {
-        @Override
-        public void enviarMensaje(String txt){
-        
-        }
+    private String email;
+    @Override
+    public void enviarMensaje(String txt){
+    
+    }
 }
