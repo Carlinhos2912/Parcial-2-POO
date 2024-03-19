@@ -64,12 +64,34 @@ public class Inventario implements GestorInventario {
     
     @Override
     public void agregarAPrestamos(Inventario inventario, Libro libro) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Boolean est = false;
+        for (Libro muestra : inventario.getStock()) {
+            if (muestra.getIsbn().equals(libro.getIsbn()) && muestra.consultarDisponibilidad() ) {
+                muestra.setDisponibles(muestra.getDisponibles()-1);
+                inventario.getPrestamos().add(libro); // else try inventario.setPrestamos(inventario.getPrestamos().add(libro));
+                break;
+            }
+        }
+        if (!est) {
+            System.out.println("El libro no esta disponible");
+        }
     }
     
     @Override
     public void eliminarDePrestamos(Inventario inventario, Libro libro) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
+        Boolean est = false;
+        for (Libro muestra : inventario.getPrestamos()) {
+            if (muestra.getIsbn().equals(libro.getIsbn())) {
+                muestra.setDisponibles(muestra.getDisponibles()-1);
+                inventario.getPrestamos().remove(libro);
+                break;
+            }
+        }
+        if (!est) {
+            System.out.println("El prestamo del libro "+libro.getTitulo()+" no se encuentra registrado");
+        }
+        
     }
     
     public static void main(String[] args) {
