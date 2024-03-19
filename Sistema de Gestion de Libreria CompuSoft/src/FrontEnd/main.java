@@ -29,7 +29,9 @@ public class main extends javax.swing.JFrame {
         background = new javax.swing.JPanel();
         lblMainLogo = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
         lblBookInfoHolder = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -51,44 +53,50 @@ public class main extends javax.swing.JFrame {
         background.add(lblMainLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(612, 30, 120, 120));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        jPanel2.setMaximumSize(new java.awt.Dimension(210, 300));
+        jPanel2.setPreferredSize(new java.awt.Dimension(210, 300));
         jPanel2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jPanel2MouseClicked(evt);
             }
         });
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 230, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        jLabel1.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel1.setText("<html>Titulo: XXXXXXXXXX <br>Autor: XXXXXXXXXX <br>ISBN: XXXXXXXXX <br>Precio: XXXXXXXXXX <br>Disponibles: XXX</html>");
+        jLabel1.setAlignmentY(5.0F);
+        jLabel1.setMaximumSize(new java.awt.Dimension(200, 300));
+        jLabel1.setMinimumSize(new java.awt.Dimension(200, 300));
+        jLabel1.setPreferredSize(new java.awt.Dimension(200, 300));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 190, 300));
 
-        background.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 230, 230, 300));
+        background.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 230, 210, 300));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        jPanel1.setMaximumSize(new java.awt.Dimension(210, 300));
+        jPanel1.setPreferredSize(new java.awt.Dimension(210, 300));
         jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jPanel1MouseClicked(evt);
             }
         });
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 230, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        jLabel2.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel2.setText("<html>Titulo: XXXXXXXXXX <br>Autor: XXXXXXXXXX <br>ISBN: XXXXXXXXX <br>Precio: XXXXXXXXXX <br>Disponibles: XXX</html>");
+        jLabel2.setAlignmentY(5.0F);
+        jLabel2.setMaximumSize(new java.awt.Dimension(200, 300));
+        jLabel2.setMinimumSize(new java.awt.Dimension(200, 300));
+        jLabel2.setPreferredSize(new java.awt.Dimension(200, 300));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 190, 300));
 
-        background.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 230, 230, 300));
+        background.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 230, 210, 300));
 
         lblBookInfoHolder.setIcon(new javax.swing.ImageIcon(getClass().getResource("/FrontEnd/media/bookInfoHolder.png"))); // NOI18N
         lblBookInfoHolder.setMaximumSize(new java.awt.Dimension(660, 420));
@@ -183,6 +191,8 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JPanel background;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblBookInfoHolder;
