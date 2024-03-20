@@ -4,16 +4,20 @@
  */
 package FrontEnd;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
+
 /**
  *
  * @author carlo
  */
-public class main extends javax.swing.JFrame {
+public class Main extends javax.swing.JFrame {
 
     /**
      * Creates new form main
      */
-    public main() {
+    public Main() {
         initComponents();
     }
 
@@ -26,23 +30,330 @@ public class main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        background = new javax.swing.JPanel();
-        lblMainLogo = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        lblBookInfoHolder = new javax.swing.JLabel();
+        intFrameClientePrestamo = new javax.swing.JInternalFrame();
+        intFrameClienteCompra = new javax.swing.JInternalFrame();
+        intFrameAdminVentas = new javax.swing.JInternalFrame();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        intFrameAdminPrestamos = new javax.swing.JInternalFrame();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable3 = new javax.swing.JTable();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
+        intFrameAdminInventario = new javax.swing.JInternalFrame();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        intFrameCliente = new javax.swing.JInternalFrame();
+        backgroundCliente = new javax.swing.JPanel();
+        panelBookClient = new javax.swing.JPanel();
+        lblBookClientInfo = new javax.swing.JLabel();
+        btnComprar = new javax.swing.JButton();
+        btnPrestar = new javax.swing.JButton();
+        intFrameAdminConfig = new javax.swing.JInternalFrame();
+        backgroundAdminConfig = new javax.swing.JPanel();
+        btnAdminVentas = new javax.swing.JButton();
+        btnAdminInventario = new javax.swing.JButton();
+        btnAdminPrestamos = new javax.swing.JButton();
+        background = new javax.swing.JPanel();
+        lblMainLogo = new javax.swing.JLabel();
+        panelBook1 = new javax.swing.JPanel();
+        lblBook1Info = new javax.swing.JLabel();
+        panelBook2 = new javax.swing.JPanel();
+        lblBook2Info = new javax.swing.JLabel();
+        lblBookInfoHolder = new javax.swing.JLabel();
+        btnPreviousBook = new javax.swing.JButton();
+        btnNextBook = new javax.swing.JButton();
+        btnAdminConfig = new javax.swing.JButton();
+        btnClose = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Lectura sin fin");
         setAlwaysOnTop(true);
         setMaximumSize(new java.awt.Dimension(1344, 756));
         setMinimumSize(new java.awt.Dimension(1344, 756));
+        setUndecorated(true);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        intFrameClientePrestamo.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        intFrameClientePrestamo.setClosable(true);
+        intFrameClientePrestamo.setTitle("Prestar");
+        intFrameClientePrestamo.setMaximumSize(new java.awt.Dimension(700, 450));
+        intFrameClientePrestamo.setMinimumSize(new java.awt.Dimension(700, 450));
+        intFrameClientePrestamo.setPreferredSize(new java.awt.Dimension(700, 450));
+        intFrameClientePrestamo.setVisible(false);
+        intFrameClientePrestamo.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().add(intFrameClientePrestamo, new org.netbeans.lib.awtextra.AbsoluteConstraints(322, 155, 700, 450));
+
+        intFrameClienteCompra.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        intFrameClienteCompra.setClosable(true);
+        intFrameClienteCompra.setTitle("Comprar");
+        intFrameClienteCompra.setMaximumSize(new java.awt.Dimension(700, 450));
+        intFrameClienteCompra.setMinimumSize(new java.awt.Dimension(700, 450));
+        intFrameClienteCompra.setPreferredSize(new java.awt.Dimension(700, 450));
+        intFrameClienteCompra.setVisible(false);
+        intFrameClienteCompra.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().add(intFrameClienteCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(322, 155, 700, 450));
+
+        intFrameAdminVentas.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        intFrameAdminVentas.setClosable(true);
+        intFrameAdminVentas.setTitle("Ventas");
+        intFrameAdminVentas.setMaximumSize(new java.awt.Dimension(700, 450));
+        intFrameAdminVentas.setMinimumSize(new java.awt.Dimension(700, 450));
+        intFrameAdminVentas.setPreferredSize(new java.awt.Dimension(700, 450));
+        intFrameAdminVentas.setVisible(false);
+        intFrameAdminVentas.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jScrollPane1.setMaximumSize(new java.awt.Dimension(500, 350));
+        jScrollPane1.setMinimumSize(new java.awt.Dimension(500, 350));
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(500, 350));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        intFrameAdminVentas.getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, 500, 350));
+
+        getContentPane().add(intFrameAdminVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(322, 155, 700, 450));
+
+        intFrameAdminPrestamos.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        intFrameAdminPrestamos.setClosable(true);
+        intFrameAdminPrestamos.setTitle("Prestamos");
+        intFrameAdminPrestamos.setMaximumSize(new java.awt.Dimension(700, 450));
+        intFrameAdminPrestamos.setMinimumSize(new java.awt.Dimension(700, 450));
+        intFrameAdminPrestamos.setPreferredSize(new java.awt.Dimension(700, 450));
+        intFrameAdminPrestamos.setVisible(false);
+        intFrameAdminPrestamos.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jScrollPane3.setFocusable(false);
+        jScrollPane3.setMaximumSize(new java.awt.Dimension(500, 250));
+        jScrollPane3.setMinimumSize(new java.awt.Dimension(500, 250));
+        jScrollPane3.setPreferredSize(new java.awt.Dimension(500, 250));
+
+        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(jTable3);
+
+        intFrameAdminPrestamos.getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, 500, 250));
+
+        jButton5.setText("Precio");
+        jButton5.setMaximumSize(new java.awt.Dimension(140, 50));
+        jButton5.setMinimumSize(new java.awt.Dimension(140, 50));
+        jButton5.setPreferredSize(new java.awt.Dimension(140, 50));
+        intFrameAdminPrestamos.getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(365, 320, 140, 50));
+
+        jButton6.setText("Disponibilidad");
+        jButton6.setMaximumSize(new java.awt.Dimension(140, 50));
+        jButton6.setMinimumSize(new java.awt.Dimension(140, 50));
+        jButton6.setPreferredSize(new java.awt.Dimension(75, 25));
+        intFrameAdminPrestamos.getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(195, 320, 140, 50));
+
+        getContentPane().add(intFrameAdminPrestamos, new org.netbeans.lib.awtextra.AbsoluteConstraints(322, 155, 700, 450));
+
+        intFrameAdminInventario.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        intFrameAdminInventario.setClosable(true);
+        intFrameAdminInventario.setTitle("Inventario");
+        intFrameAdminInventario.setMaximumSize(new java.awt.Dimension(700, 450));
+        intFrameAdminInventario.setMinimumSize(new java.awt.Dimension(700, 450));
+        intFrameAdminInventario.setPreferredSize(new java.awt.Dimension(700, 450));
+        intFrameAdminInventario.setVisible(false);
+        intFrameAdminInventario.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jScrollPane2.setFocusable(false);
+        jScrollPane2.setMaximumSize(new java.awt.Dimension(500, 250));
+        jScrollPane2.setMinimumSize(new java.awt.Dimension(500, 250));
+        jScrollPane2.setPreferredSize(new java.awt.Dimension(500, 250));
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable2);
+
+        intFrameAdminInventario.getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, 500, 250));
+
+        jButton1.setText("Precio");
+        jButton1.setMaximumSize(new java.awt.Dimension(140, 50));
+        jButton1.setMinimumSize(new java.awt.Dimension(140, 50));
+        jButton1.setPreferredSize(new java.awt.Dimension(140, 50));
+        intFrameAdminInventario.getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(365, 320, 140, 50));
+
+        jButton2.setText("Disponibilidad");
+        jButton2.setMaximumSize(new java.awt.Dimension(140, 50));
+        jButton2.setMinimumSize(new java.awt.Dimension(140, 50));
+        jButton2.setPreferredSize(new java.awt.Dimension(75, 25));
+        intFrameAdminInventario.getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(195, 320, 140, 50));
+
+        getContentPane().add(intFrameAdminInventario, new org.netbeans.lib.awtextra.AbsoluteConstraints(322, 155, 700, 450));
+
+        intFrameCliente.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        intFrameCliente.setClosable(true);
+        intFrameCliente.setTitle("Cliente");
+        intFrameCliente.setMaximumSize(new java.awt.Dimension(700, 450));
+        intFrameCliente.setMinimumSize(new java.awt.Dimension(700, 450));
+        intFrameCliente.setPreferredSize(new java.awt.Dimension(700, 450));
+        intFrameCliente.setVisible(false);
+        intFrameCliente.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        backgroundCliente.setBackground(new java.awt.Color(255, 189, 89));
+        backgroundCliente.setFocusable(false);
+        backgroundCliente.setMaximumSize(new java.awt.Dimension(700, 430));
+        backgroundCliente.setMinimumSize(new java.awt.Dimension(700, 430));
+        backgroundCliente.setPreferredSize(new java.awt.Dimension(700, 430));
+        backgroundCliente.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        panelBookClient.setBackground(new java.awt.Color(132, 79, 79));
+        panelBookClient.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        panelBookClient.setMaximumSize(new java.awt.Dimension(210, 300));
+        panelBookClient.setPreferredSize(new java.awt.Dimension(210, 300));
+        panelBookClient.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelBookClientMouseClicked(evt);
+            }
+        });
+        panelBookClient.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblBookClientInfo.setBackground(new java.awt.Color(73, 66, 60));
+        lblBookClientInfo.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 14)); // NOI18N
+        lblBookClientInfo.setForeground(new java.awt.Color(255, 255, 255));
+        lblBookClientInfo.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblBookClientInfo.setText("<html>Titulo: No info<br>Autor: <br>ISBN: <br>Precio: <br>Disponibles: </html>");
+        lblBookClientInfo.setAlignmentY(5.0F);
+        lblBookClientInfo.setMaximumSize(new java.awt.Dimension(200, 300));
+        lblBookClientInfo.setMinimumSize(new java.awt.Dimension(200, 300));
+        lblBookClientInfo.setPreferredSize(new java.awt.Dimension(200, 300));
+        panelBookClient.add(lblBookClientInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 190, 300));
+
+        backgroundCliente.add(panelBookClient, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, 210, 300));
+
+        btnComprar.setBackground(new java.awt.Color(132, 79, 79));
+        btnComprar.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 18)); // NOI18N
+        btnComprar.setForeground(new java.awt.Color(255, 255, 255));
+        btnComprar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/FrontEnd/media/btnComprar.png"))); // NOI18N
+        btnComprar.setBorder(null);
+        btnComprar.setFocusable(false);
+        btnComprar.setOpaque(false);
+        btnComprar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnComprarActionPerformed(evt);
+            }
+        });
+        backgroundCliente.add(btnComprar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 120, 210, 80));
+
+        btnPrestar.setBackground(new java.awt.Color(132, 79, 79));
+        btnPrestar.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 18)); // NOI18N
+        btnPrestar.setForeground(new java.awt.Color(255, 255, 255));
+        btnPrestar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/FrontEnd/media/btnPrestar.png"))); // NOI18N
+        btnPrestar.setBorder(null);
+        btnPrestar.setFocusable(false);
+        btnPrestar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPrestarActionPerformed(evt);
+            }
+        });
+        backgroundCliente.add(btnPrestar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 230, 210, 80));
+
+        intFrameCliente.getContentPane().add(backgroundCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 430));
+
+        getContentPane().add(intFrameCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(322, 155, 700, 450));
+
+        intFrameAdminConfig.setBackground(new java.awt.Color(255, 247, 177));
+        intFrameAdminConfig.setBorder(null);
+        intFrameAdminConfig.setClosable(true);
+        intFrameAdminConfig.setTitle("Administrador");
+        intFrameAdminConfig.setMaximumSize(new java.awt.Dimension(700, 450));
+        intFrameAdminConfig.setMinimumSize(new java.awt.Dimension(700, 450));
+        intFrameAdminConfig.setPreferredSize(new java.awt.Dimension(700, 450));
+        try {
+            intFrameAdminConfig.setSelected(true);
+        } catch (java.beans.PropertyVetoException e1) {
+            e1.printStackTrace();
+        }
+        intFrameAdminConfig.setVisible(false);
+        intFrameAdminConfig.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        backgroundAdminConfig.setBackground(new java.awt.Color(255, 189, 89));
+        backgroundAdminConfig.setFocusable(false);
+        backgroundAdminConfig.setMaximumSize(new java.awt.Dimension(700, 430));
+        backgroundAdminConfig.setMinimumSize(new java.awt.Dimension(700, 430));
+        backgroundAdminConfig.setPreferredSize(new java.awt.Dimension(700, 430));
+        backgroundAdminConfig.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnAdminVentas.setForeground(new java.awt.Color(0, 0, 0));
+        btnAdminVentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/FrontEnd/media/btnVentas.png"))); // NOI18N
+        btnAdminVentas.setText("");
+        btnAdminVentas.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        btnAdminVentas.setFocusable(false);
+        btnAdminVentas.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        btnAdminVentas.setMaximumSize(new java.awt.Dimension(180, 300));
+        btnAdminVentas.setMinimumSize(new java.awt.Dimension(180, 300));
+        btnAdminVentas.setPreferredSize(new java.awt.Dimension(180, 300));
+        btnAdminVentas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdminVentasActionPerformed(evt);
+            }
+        });
+        backgroundAdminConfig.add(btnAdminVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 180, 300));
+
+        btnAdminInventario.setForeground(new java.awt.Color(0, 0, 0));
+        btnAdminInventario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/FrontEnd/media/btnInventario.png"))); // NOI18N
+        btnAdminInventario.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        btnAdminInventario.setFocusable(false);
+        btnAdminInventario.setMaximumSize(new java.awt.Dimension(180, 300));
+        btnAdminInventario.setMinimumSize(new java.awt.Dimension(180, 300));
+        btnAdminInventario.setPreferredSize(new java.awt.Dimension(180, 300));
+        btnAdminInventario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdminInventarioActionPerformed(evt);
+            }
+        });
+        backgroundAdminConfig.add(btnAdminInventario, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 60, 180, 300));
+
+        btnAdminPrestamos.setForeground(new java.awt.Color(0, 0, 0));
+        btnAdminPrestamos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/FrontEnd/media/btnPrestamos.png"))); // NOI18N
+        btnAdminPrestamos.setText("");
+        btnAdminPrestamos.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        btnAdminPrestamos.setFocusable(false);
+        btnAdminPrestamos.setMaximumSize(new java.awt.Dimension(180, 300));
+        btnAdminPrestamos.setMinimumSize(new java.awt.Dimension(180, 300));
+        btnAdminPrestamos.setPreferredSize(new java.awt.Dimension(180, 300));
+        btnAdminPrestamos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdminPrestamosActionPerformed(evt);
+            }
+        });
+        backgroundAdminConfig.add(btnAdminPrestamos, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 60, 180, 300));
+
+        intFrameAdminConfig.getContentPane().add(backgroundAdminConfig, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 430));
+
+        getContentPane().add(intFrameAdminConfig, new org.netbeans.lib.awtextra.AbsoluteConstraints(322, 155, 700, 450));
 
         background.setBackground(new java.awt.Color(255, 247, 177));
         background.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -51,105 +362,180 @@ public class main extends javax.swing.JFrame {
         lblMainLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/FrontEnd/media/lecturaSinFinLogo.png"))); // NOI18N
         background.add(lblMainLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(612, 30, 120, 120));
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
-        jPanel2.setMaximumSize(new java.awt.Dimension(210, 300));
-        jPanel2.setPreferredSize(new java.awt.Dimension(210, 300));
-        jPanel2.addMouseListener(new java.awt.event.MouseAdapter() {
+        panelBook1.setBackground(new java.awt.Color(255, 255, 255));
+        panelBook1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        panelBook1.setMaximumSize(new java.awt.Dimension(210, 300));
+        panelBook1.setPreferredSize(new java.awt.Dimension(210, 300));
+        panelBook1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel2MouseClicked(evt);
+                panelBook1MouseClicked(evt);
             }
         });
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panelBook1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel1.setText("<html>Titulo: XXXXXXXXXX <br>Autor: XXXXXXXXXX <br>ISBN: XXXXXXXXX <br>Precio: XXXXXXXXXX <br>Disponibles: XXX</html>");
-        jLabel1.setAlignmentY(5.0F);
-        jLabel1.setMaximumSize(new java.awt.Dimension(200, 300));
-        jLabel1.setMinimumSize(new java.awt.Dimension(200, 300));
-        jLabel1.setPreferredSize(new java.awt.Dimension(200, 300));
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 190, 300));
+        lblBook1Info.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 14)); // NOI18N
+        lblBook1Info.setForeground(new java.awt.Color(0, 0, 0));
+        lblBook1Info.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblBook1Info.setText("<html>Titulo: No info<br>Autor: <br>ISBN: <br>Precio: <br>Disponibles: </html>");
+        lblBook1Info.setAlignmentY(5.0F);
+        lblBook1Info.setMaximumSize(new java.awt.Dimension(200, 300));
+        lblBook1Info.setMinimumSize(new java.awt.Dimension(200, 300));
+        lblBook1Info.setPreferredSize(new java.awt.Dimension(200, 300));
+        panelBook1.add(lblBook1Info, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 190, 300));
 
-        background.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 230, 210, 300));
+        background.add(panelBook1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 230, 210, 300));
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
-        jPanel1.setMaximumSize(new java.awt.Dimension(210, 300));
-        jPanel1.setPreferredSize(new java.awt.Dimension(210, 300));
-        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+        panelBook2.setBackground(new java.awt.Color(255, 255, 255));
+        panelBook2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        panelBook2.setMaximumSize(new java.awt.Dimension(210, 300));
+        panelBook2.setPreferredSize(new java.awt.Dimension(210, 300));
+        panelBook2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel1MouseClicked(evt);
+                panelBook2MouseClicked(evt);
             }
         });
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panelBook2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel2.setText("<html>Titulo: XXXXXXXXXX <br>Autor: XXXXXXXXXX <br>ISBN: XXXXXXXXX <br>Precio: XXXXXXXXXX <br>Disponibles: XXX</html>");
-        jLabel2.setAlignmentY(5.0F);
-        jLabel2.setMaximumSize(new java.awt.Dimension(200, 300));
-        jLabel2.setMinimumSize(new java.awt.Dimension(200, 300));
-        jLabel2.setPreferredSize(new java.awt.Dimension(200, 300));
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 190, 300));
+        lblBook2Info.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 14)); // NOI18N
+        lblBook2Info.setForeground(new java.awt.Color(0, 0, 0));
+        lblBook2Info.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblBook2Info.setText("<html>Titulo: No info <br>Autor: <br>ISBN: <br>Precio: <br>Disponibles: </html>");
+        lblBook2Info.setAlignmentY(5.0F);
+        lblBook2Info.setMaximumSize(new java.awt.Dimension(200, 300));
+        lblBook2Info.setMinimumSize(new java.awt.Dimension(200, 300));
+        lblBook2Info.setPreferredSize(new java.awt.Dimension(200, 300));
+        panelBook2.add(lblBook2Info, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 190, 300));
 
-        background.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 230, 210, 300));
+        background.add(panelBook2, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 230, 210, 300));
 
         lblBookInfoHolder.setIcon(new javax.swing.ImageIcon(getClass().getResource("/FrontEnd/media/bookInfoHolder.png"))); // NOI18N
         background.add(lblBookInfoHolder, new org.netbeans.lib.awtextra.AbsoluteConstraints(342, 180, 660, 420));
 
-        jButton1.setBackground(new java.awt.Color(255, 189, 89));
-        jButton1.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 40)); // NOI18N
-        jButton1.setText("<");
-        jButton1.setBorder(null);
-        jButton1.setFocusable(false);
-        jButton1.setMaximumSize(new java.awt.Dimension(80, 230));
-        jButton1.setMinimumSize(new java.awt.Dimension(80, 230));
-        jButton1.setName(""); // NOI18N
-        jButton1.setPreferredSize(new java.awt.Dimension(80, 230));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnPreviousBook.setBackground(new java.awt.Color(255, 189, 89));
+        btnPreviousBook.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 40)); // NOI18N
+        btnPreviousBook.setForeground(new java.awt.Color(73, 66, 60));
+        btnPreviousBook.setText("<");
+        btnPreviousBook.setBorder(null);
+        btnPreviousBook.setFocusable(false);
+        btnPreviousBook.setMaximumSize(new java.awt.Dimension(80, 230));
+        btnPreviousBook.setMinimumSize(new java.awt.Dimension(80, 230));
+        btnPreviousBook.setName(""); // NOI18N
+        btnPreviousBook.setPreferredSize(new java.awt.Dimension(80, 230));
+        btnPreviousBook.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnPreviousBookActionPerformed(evt);
             }
         });
-        background.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(182, 300, 80, 230));
+        background.add(btnPreviousBook, new org.netbeans.lib.awtextra.AbsoluteConstraints(182, 300, 80, 230));
 
-        jButton2.setBackground(new java.awt.Color(255, 189, 89));
-        jButton2.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 40)); // NOI18N
-        jButton2.setText(">");
-        jButton2.setBorder(null);
-        jButton2.setFocusable(false);
-        jButton2.setMaximumSize(new java.awt.Dimension(80, 230));
-        jButton2.setMinimumSize(new java.awt.Dimension(80, 230));
-        jButton2.setName(""); // NOI18N
-        jButton2.setPreferredSize(new java.awt.Dimension(80, 230));
-        background.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1082, 300, 80, 230));
+        btnNextBook.setBackground(new java.awt.Color(255, 189, 89));
+        btnNextBook.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 40)); // NOI18N
+        btnNextBook.setForeground(new java.awt.Color(73, 66, 60));
+        btnNextBook.setText(">");
+        btnNextBook.setBorder(null);
+        btnNextBook.setFocusable(false);
+        btnNextBook.setMaximumSize(new java.awt.Dimension(80, 230));
+        btnNextBook.setMinimumSize(new java.awt.Dimension(80, 230));
+        btnNextBook.setName(""); // NOI18N
+        btnNextBook.setPreferredSize(new java.awt.Dimension(80, 230));
+        background.add(btnNextBook, new org.netbeans.lib.awtextra.AbsoluteConstraints(1082, 300, 80, 230));
+
+        btnAdminConfig.setIcon(new javax.swing.ImageIcon(getClass().getResource("/FrontEnd/media/btnAdmin.png"))); // NOI18N
+        btnAdminConfig.setBorder(null);
+        btnAdminConfig.setFocusable(false);
+        btnAdminConfig.setMaximumSize(new java.awt.Dimension(100, 100));
+        btnAdminConfig.setMinimumSize(new java.awt.Dimension(100, 100));
+        btnAdminConfig.setPreferredSize(new java.awt.Dimension(100, 100));
+        btnAdminConfig.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdminConfigActionPerformed(evt);
+            }
+        });
+        background.add(btnAdminConfig, new org.netbeans.lib.awtextra.AbsoluteConstraints(537, 620, 100, 100));
+
+        btnClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/FrontEnd/media/btnSalir.png"))); // NOI18N
+        btnClose.setBorder(null);
+        btnClose.setFocusable(false);
+        btnClose.setMaximumSize(new java.awt.Dimension(100, 100));
+        btnClose.setMinimumSize(new java.awt.Dimension(100, 100));
+        btnClose.setPreferredSize(new java.awt.Dimension(100, 100));
+        btnClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCloseActionPerformed(evt);
+            }
+        });
+        background.add(btnClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(687, 620, 100, 100));
 
         getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1344, 756));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnPreviousBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreviousBookActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnPreviousBookActionPerformed
 
-    private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
-        // TODO add your handling code here:
-        System.out.println("Presionaste el panel 1");
-    }//GEN-LAST:event_jPanel1MouseClicked
+    private void panelBook2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBook2MouseClicked
+        intFrameCliente.setVisible(!intFrameCliente.isVisible());
+        lblBookClientInfo.setText(lblBook2Info.getText());
+    }//GEN-LAST:event_panelBook2MouseClicked
 
-    private void jPanel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseClicked
+    private void panelBook1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBook1MouseClicked
+        intFrameCliente.setVisible(!intFrameCliente.isVisible());
+        lblBookClientInfo.setText(lblBook1Info.getText());
+    }//GEN-LAST:event_panelBook1MouseClicked
+
+    private void btnAdminConfigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminConfigActionPerformed
+        intFrameAdminConfig.setVisible(!intFrameAdminConfig.isVisible());
+    }//GEN-LAST:event_btnAdminConfigActionPerformed
+
+    private void btnAdminVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminVentasActionPerformed
+        intFrameAdminVentas.setVisible(!intFrameAdminVentas.isVisible());
+        intFrameAdminConfig.setVisible(false);
+    }//GEN-LAST:event_btnAdminVentasActionPerformed
+
+    private void btnAdminInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminInventarioActionPerformed
+        intFrameAdminInventario.setVisible(!intFrameAdminInventario.isVisible());
+        intFrameAdminConfig.setVisible(false);
+    }//GEN-LAST:event_btnAdminInventarioActionPerformed
+
+    private void panelBookClientMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBookClientMouseClicked
         // TODO add your handling code here:
-        System.out.println("Presionaste el panel 2");
-    }//GEN-LAST:event_jPanel2MouseClicked
+    }//GEN-LAST:event_panelBookClientMouseClicked
+
+    private void btnPrestarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrestarActionPerformed
+        intFrameClientePrestamo.setVisible(!intFrameClientePrestamo.isVisible());
+        intFrameCliente.setVisible(false);
+    }//GEN-LAST:event_btnPrestarActionPerformed
+
+    private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnCloseActionPerformed
+
+    private void btnAdminPrestamosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminPrestamosActionPerformed
+        intFrameAdminPrestamos.setVisible(!intFrameAdminPrestamos.isVisible());
+        intFrameAdminConfig.setVisible(false);
+    }//GEN-LAST:event_btnAdminPrestamosActionPerformed
+
+    private void btnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarActionPerformed
+        intFrameClienteCompra.setVisible(!intFrameClienteCompra.isVisible());
+        intFrameCliente.setVisible(false);
+    }//GEN-LAST:event_btnComprarActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        JFrame SS = new SplashScreen();
+        SS.setLocationRelativeTo(null);
+        SS.setVisible(true);
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException ex) {
+            System.out.println("Chale Mi casita");
+        }
+        SS.dispose();
+        
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -163,33 +549,67 @@ public class main extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new main().setVisible(true);
+                JFrame mainForm = new Main();
+                mainForm.setLocationRelativeTo(null);
+                mainForm.setVisible(true);
             }
         });
+        
+        
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel background;
+    private javax.swing.JPanel backgroundAdminConfig;
+    private javax.swing.JPanel backgroundCliente;
+    private javax.swing.JButton btnAdminConfig;
+    private javax.swing.JButton btnAdminInventario;
+    private javax.swing.JButton btnAdminPrestamos;
+    private javax.swing.JButton btnAdminVentas;
+    private javax.swing.JButton btnClose;
+    private javax.swing.JButton btnComprar;
+    private javax.swing.JButton btnNextBook;
+    private javax.swing.JButton btnPrestar;
+    private javax.swing.JButton btnPreviousBook;
+    private javax.swing.JInternalFrame intFrameAdminConfig;
+    private javax.swing.JInternalFrame intFrameAdminInventario;
+    private javax.swing.JInternalFrame intFrameAdminPrestamos;
+    private javax.swing.JInternalFrame intFrameAdminVentas;
+    private javax.swing.JInternalFrame intFrameCliente;
+    private javax.swing.JInternalFrame intFrameClienteCompra;
+    private javax.swing.JInternalFrame intFrameClientePrestamo;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTable3;
+    private javax.swing.JLabel lblBook1Info;
+    private javax.swing.JLabel lblBook2Info;
+    private javax.swing.JLabel lblBookClientInfo;
     private javax.swing.JLabel lblBookInfoHolder;
     private javax.swing.JLabel lblMainLogo;
+    private javax.swing.JPanel panelBook1;
+    private javax.swing.JPanel panelBook2;
+    private javax.swing.JPanel panelBookClient;
     // End of variables declaration//GEN-END:variables
 }
