@@ -35,13 +35,9 @@ public class SplashScreen extends javax.swing.JFrame {
         setMaximumSize(new java.awt.Dimension(500, 500));
         setMinimumSize(new java.awt.Dimension(500, 500));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(500, 500));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/FrontEnd/media/CompusoftSplashScreen.png"))); // NOI18N
-        jLabel1.setMaximumSize(new java.awt.Dimension(500, 500));
-        jLabel1.setMinimumSize(new java.awt.Dimension(500, 500));
-        jLabel1.setPreferredSize(new java.awt.Dimension(500, 500));
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 500));
 
         pack();

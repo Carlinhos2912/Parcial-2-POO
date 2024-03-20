@@ -8,6 +8,8 @@ public class Inventario implements GestorInventario {
     private ArrayList<Libro> prestamos;
 
     public Inventario() {
+        this.stock = new ArrayList<Libro>();
+        this.prestamos = new ArrayList<Libro>();
     }
 
     public Inventario(ArrayList<Libro> stock, ArrayList<Libro> prestamos) {
@@ -31,28 +33,13 @@ public class Inventario implements GestorInventario {
         this.prestamos = prestamos;
     }
 
-    @Override
-    public void agregarAStock(Inventario inventario, Libro libro) {
-        Boolean est = false;
-        for (Libro muestra : inventario.getStock()) {
-            if (muestra.getIsbn().equals(libro.getIsbn())) {
-                muestra.setDisponibles(muestra.getDisponibles() + 1);
-
-                est = true;
-                break;
-            }
-        }
-        if (!est) {
-            inventario.getStock().add(libro);
-        }
-    }
 
     @Override
-    public void eliminarDeStock(Inventario inventario, Libro libro) {
+    public void eliminarDeStock(Libro libro) {
         Boolean est = false;
-        for (Libro muestra : inventario.getStock()) {
+        for (Libro muestra : this.getStock()) {
             if (muestra.getIsbn().equals(libro.getIsbn())) {
-                inventario.getStock().remove(muestra);
+                this.getStock().remove(muestra);
                 est = true;
                 break;
             }
@@ -63,12 +50,12 @@ public class Inventario implements GestorInventario {
     }
 
     @Override
-    public void agregarAPrestamos(Inventario inventario, Libro libro) {
+    public void agregarAPrestamos(Libro libro) {
         Boolean est = false;
-        for (Libro muestra : inventario.getStock()) {
+        for (Libro muestra : this.getStock()) {
             if (muestra.getIsbn().equals(libro.getIsbn()) && muestra.consultarDisponibilidad()) {
                 muestra.setDisponibles(muestra.getDisponibles() - 1);
-                inventario.getPrestamos().add(libro); // else try inventario.setPrestamos(inventario.getPrestamos().add(libro));
+                this.getPrestamos().add(libro); // else try inventario.setPrestamos(inventario.getPrestamos().add(libro));
                 break;
             }
         }
@@ -78,13 +65,13 @@ public class Inventario implements GestorInventario {
     }
 
     @Override
-    public void eliminarDePrestamos(Inventario inventario, Libro libro) {
+    public void eliminarDePrestamos(Libro libro) {
 
         Boolean est = false;
-        for (Libro muestra : inventario.getPrestamos()) {
+        for (Libro muestra : this.getPrestamos()) {
             if (muestra.getIsbn().equals(libro.getIsbn())) {
                 muestra.setDisponibles(muestra.getDisponibles() - 1);
-                inventario.getPrestamos().remove(libro);
+                this.getPrestamos().remove(libro);
                 break;
             }
         }
@@ -93,4 +80,21 @@ public class Inventario implements GestorInventario {
         }
 
     }
+
+    @Override
+    public void agregarAStock(Libro libro) {
+        Boolean est = false;
+        for (Libro muestra : this.getStock()) {
+            if (muestra.getIsbn().equals(libro.getIsbn())) {
+                muestra.setDisponibles(muestra.getDisponibles() + 1);
+
+                est = true;
+                break;
+            }
+        }
+        if (!est) {
+            this.getStock().add(libro);
+        }
+    }
+
 }

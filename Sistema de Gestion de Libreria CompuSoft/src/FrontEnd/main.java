@@ -4,9 +4,17 @@
  */
 package FrontEnd;
 
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import sistema.de.gestion.de.libreria.compusoft.DetallePedido;
+import sistema.de.gestion.de.libreria.compusoft.Empleado;
+import sistema.de.gestion.de.libreria.compusoft.Inventario;
+import sistema.de.gestion.de.libreria.compusoft.Libro;
+import sistema.de.gestion.de.libreria.compusoft.Venta;
 
 /**
  *
@@ -17,8 +25,15 @@ public class Main extends javax.swing.JFrame {
     /**
      * Creates new form main
      */
+    private Inventario inventario;
+    private ArrayList<Venta> ventas = new ArrayList<Venta>();
     public Main() {
         initComponents();
+        
+        inventario = new Inventario();
+        ventas.add(new Venta(new Empleado(123, "juan", "perez", "cabo"),"10/10/2024","vendio el libro x"));
+        inventario.agregarAStock(new Libro("Un titulo","Alguien","ISBN123123",30000,100));
+        inventario.agregarAPrestamos(inventario.getStock().get(0));
     }
 
     /**
@@ -34,15 +49,15 @@ public class Main extends javax.swing.JFrame {
         intFrameClienteCompra = new javax.swing.JInternalFrame();
         intFrameAdminVentas = new javax.swing.JInternalFrame();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        ventasTable = new javax.swing.JTable();
         intFrameAdminPrestamos = new javax.swing.JInternalFrame();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        prestamosTable = new javax.swing.JTable();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         intFrameAdminInventario = new javax.swing.JInternalFrame();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        inventarioTable = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         intFrameCliente = new javax.swing.JInternalFrame();
@@ -110,7 +125,7 @@ public class Main extends javax.swing.JFrame {
         jScrollPane1.setMinimumSize(new java.awt.Dimension(500, 350));
         jScrollPane1.setPreferredSize(new java.awt.Dimension(500, 350));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        ventasTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -121,7 +136,7 @@ public class Main extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(ventasTable);
 
         intFrameAdminVentas.getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, 500, 350));
 
@@ -141,7 +156,7 @@ public class Main extends javax.swing.JFrame {
         jScrollPane3.setMinimumSize(new java.awt.Dimension(500, 250));
         jScrollPane3.setPreferredSize(new java.awt.Dimension(500, 250));
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        prestamosTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -152,7 +167,7 @@ public class Main extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane3.setViewportView(jTable3);
+        jScrollPane3.setViewportView(prestamosTable);
 
         intFrameAdminPrestamos.getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, 500, 250));
 
@@ -184,7 +199,7 @@ public class Main extends javax.swing.JFrame {
         jScrollPane2.setMinimumSize(new java.awt.Dimension(500, 250));
         jScrollPane2.setPreferredSize(new java.awt.Dimension(500, 250));
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        inventarioTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -195,7 +210,7 @@ public class Main extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(inventarioTable);
 
         intFrameAdminInventario.getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, 500, 250));
 
@@ -259,7 +274,6 @@ public class Main extends javax.swing.JFrame {
         btnComprar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/FrontEnd/media/btnComprar.png"))); // NOI18N
         btnComprar.setBorder(null);
         btnComprar.setFocusable(false);
-        btnComprar.setOpaque(false);
         btnComprar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnComprarActionPerformed(evt);
@@ -306,9 +320,7 @@ public class Main extends javax.swing.JFrame {
         backgroundAdminConfig.setPreferredSize(new java.awt.Dimension(700, 430));
         backgroundAdminConfig.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnAdminVentas.setForeground(new java.awt.Color(0, 0, 0));
         btnAdminVentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/FrontEnd/media/btnVentas.png"))); // NOI18N
-        btnAdminVentas.setText("");
         btnAdminVentas.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         btnAdminVentas.setFocusable(false);
         btnAdminVentas.setMargin(new java.awt.Insets(0, 0, 0, 0));
@@ -322,7 +334,6 @@ public class Main extends javax.swing.JFrame {
         });
         backgroundAdminConfig.add(btnAdminVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 180, 300));
 
-        btnAdminInventario.setForeground(new java.awt.Color(0, 0, 0));
         btnAdminInventario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/FrontEnd/media/btnInventario.png"))); // NOI18N
         btnAdminInventario.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         btnAdminInventario.setFocusable(false);
@@ -336,9 +347,7 @@ public class Main extends javax.swing.JFrame {
         });
         backgroundAdminConfig.add(btnAdminInventario, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 60, 180, 300));
 
-        btnAdminPrestamos.setForeground(new java.awt.Color(0, 0, 0));
         btnAdminPrestamos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/FrontEnd/media/btnPrestamos.png"))); // NOI18N
-        btnAdminPrestamos.setText("");
         btnAdminPrestamos.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         btnAdminPrestamos.setFocusable(false);
         btnAdminPrestamos.setMaximumSize(new java.awt.Dimension(180, 300));
@@ -374,7 +383,6 @@ public class Main extends javax.swing.JFrame {
         panelBook1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblBook1Info.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 14)); // NOI18N
-        lblBook1Info.setForeground(new java.awt.Color(0, 0, 0));
         lblBook1Info.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblBook1Info.setText("<html>Titulo: No info<br>Autor: <br>ISBN: <br>Precio: <br>Disponibles: </html>");
         lblBook1Info.setAlignmentY(5.0F);
@@ -397,7 +405,6 @@ public class Main extends javax.swing.JFrame {
         panelBook2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblBook2Info.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 14)); // NOI18N
-        lblBook2Info.setForeground(new java.awt.Color(0, 0, 0));
         lblBook2Info.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblBook2Info.setText("<html>Titulo: No info <br>Autor: <br>ISBN: <br>Precio: <br>Disponibles: </html>");
         lblBook2Info.setAlignmentY(5.0F);
@@ -443,9 +450,6 @@ public class Main extends javax.swing.JFrame {
         btnAdminConfig.setIcon(new javax.swing.ImageIcon(getClass().getResource("/FrontEnd/media/btnAdmin.png"))); // NOI18N
         btnAdminConfig.setBorder(null);
         btnAdminConfig.setFocusable(false);
-        btnAdminConfig.setMaximumSize(new java.awt.Dimension(100, 100));
-        btnAdminConfig.setMinimumSize(new java.awt.Dimension(100, 100));
-        btnAdminConfig.setPreferredSize(new java.awt.Dimension(100, 100));
         btnAdminConfig.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAdminConfigActionPerformed(evt);
@@ -456,9 +460,6 @@ public class Main extends javax.swing.JFrame {
         btnClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/FrontEnd/media/btnSalir.png"))); // NOI18N
         btnClose.setBorder(null);
         btnClose.setFocusable(false);
-        btnClose.setMaximumSize(new java.awt.Dimension(100, 100));
-        btnClose.setMinimumSize(new java.awt.Dimension(100, 100));
-        btnClose.setPreferredSize(new java.awt.Dimension(100, 100));
         btnClose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCloseActionPerformed(evt);
@@ -491,11 +492,37 @@ public class Main extends javax.swing.JFrame {
 
     private void btnAdminVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminVentasActionPerformed
         intFrameAdminVentas.setVisible(!intFrameAdminVentas.isVisible());
+        writeVentasTable(ventasTable,ventas);
         intFrameAdminConfig.setVisible(false);
     }//GEN-LAST:event_btnAdminVentasActionPerformed
-
+    
+    public void writeLibroTable(javax.swing.JTable table, ArrayList<Libro> list){
+        DefaultTableModel modelo;
+        modelo = new DefaultTableModel();
+        modelo.addColumn("Titulo");
+        modelo.addColumn("Autor");
+        modelo.addColumn("ISBN");
+        modelo.addColumn("Precio");
+        modelo.addColumn("Disponibles");
+        table.setModel(modelo);
+        for (Libro lb: list){
+            modelo.addRow(new Object[]{lb.getTitulo(), lb.getAutor(), lb.getIsbn(), lb.getPrecio(), lb.getDisponibles()});
+        }
+    }
+    public void writeVentasTable(javax.swing.JTable table, ArrayList<Venta> list){
+        DefaultTableModel modelo;
+        modelo = new DefaultTableModel();
+        modelo.addColumn("Vendedor");
+        modelo.addColumn("Fecha");
+        modelo.addColumn("Detalles");
+        table.setModel(modelo);
+        for (Venta v: list){
+            modelo.addRow(new Object[]{v.getVendedor().getNombre()+" "+v.getVendedor().getApellido(),v.getFecha(),v.getDetalles()});
+        }
+    }
     private void btnAdminInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminInventarioActionPerformed
         intFrameAdminInventario.setVisible(!intFrameAdminInventario.isVisible());
+        writeLibroTable(inventarioTable,inventario.getStock());
         intFrameAdminConfig.setVisible(false);
     }//GEN-LAST:event_btnAdminInventarioActionPerformed
 
@@ -514,6 +541,7 @@ public class Main extends javax.swing.JFrame {
 
     private void btnAdminPrestamosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminPrestamosActionPerformed
         intFrameAdminPrestamos.setVisible(!intFrameAdminPrestamos.isVisible());
+        writeLibroTable(prestamosTable, inventario.getPrestamos());
         intFrameAdminConfig.setVisible(false);
     }//GEN-LAST:event_btnAdminPrestamosActionPerformed
 
@@ -593,6 +621,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JInternalFrame intFrameCliente;
     private javax.swing.JInternalFrame intFrameClienteCompra;
     private javax.swing.JInternalFrame intFrameClientePrestamo;
+    private javax.swing.JTable inventarioTable;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton5;
@@ -600,9 +629,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
     private javax.swing.JLabel lblBook1Info;
     private javax.swing.JLabel lblBook2Info;
     private javax.swing.JLabel lblBookClientInfo;
@@ -611,5 +637,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel panelBook1;
     private javax.swing.JPanel panelBook2;
     private javax.swing.JPanel panelBookClient;
+    private javax.swing.JTable prestamosTable;
+    private javax.swing.JTable ventasTable;
     // End of variables declaration//GEN-END:variables
 }
