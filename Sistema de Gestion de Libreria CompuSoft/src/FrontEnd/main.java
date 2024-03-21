@@ -5,15 +5,17 @@
 package FrontEnd;
 
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
+import sistema.de.gestion.de.libreria.compusoft.Cliente;
 import sistema.de.gestion.de.libreria.compusoft.DetallePedido;
 import sistema.de.gestion.de.libreria.compusoft.Empleado;
 import sistema.de.gestion.de.libreria.compusoft.Inventario;
 import sistema.de.gestion.de.libreria.compusoft.Libro;
+import sistema.de.gestion.de.libreria.compusoft.Notificacion;
+import sistema.de.gestion.de.libreria.compusoft.NotificacionEmail;
+import sistema.de.gestion.de.libreria.compusoft.NotificacionSMS;
 import sistema.de.gestion.de.libreria.compusoft.Venta;
 
 /**
@@ -23,17 +25,37 @@ import sistema.de.gestion.de.libreria.compusoft.Venta;
 public class Main extends javax.swing.JFrame {
 
     /**
+     * Incialización de Inventario (Stock, Prestamos) Inicialización de ventas
+     */
+    private ArrayList<Libro> stock = new ArrayList<>();
+    private ArrayList<Libro> prestamos = new ArrayList<>();
+    private ArrayList<Cliente> clientes = new ArrayList<>();
+    private Inventario inventario = new Inventario(stock, prestamos);
+    int cp1 = 0;
+    int cp2 = 1;
+
+    private ArrayList<Venta> ventas = new ArrayList<Venta>();
+
+    /**
      * Creates new form main
      */
-    private Inventario inventario;
-    private ArrayList<Venta> ventas = new ArrayList<Venta>();
+    public void setPages() {
+        if (stock.size() < 2) {
+            if (stock.size() == 1) {
+                lblBook1Info.setText("<html>Titulo: " + stock.get(cp1).getTitulo() + "<br>Autor: " + stock.get(cp1).getAutor() + " <br>ISBN: " + stock.get(cp1).getIsbn() + "<br>Precio: " + stock.get(cp1).getPrecio() + "<br>Disponibles: " + stock.get(cp1).getDisponibles() + "</html>");
+                lblBook2Info.setText("<html>Titulo: No info <br>Autor: <br>ISBN: <br>Precio: <br>Disponibles: </html>");
+            } else {
+                lblBook1Info.setText("<html>Titulo: No info <br>Autor: <br>ISBN: <br>Precio: <br>Disponibles: </html>");
+                lblBook2Info.setText("<html>Titulo: No info <br>Autor: <br>ISBN: <br>Precio: <br>Disponibles: </html>");
+            }
+        } else {
+            lblBook1Info.setText("<html>Titulo: " + stock.get(cp1).getTitulo() + "<br>Autor: " + stock.get(cp1).getAutor() + " <br>ISBN: " + stock.get(cp1).getIsbn() + "<br>Precio: " + stock.get(cp1).getPrecio() + "<br>Disponibles: " + stock.get(cp1).getDisponibles() + "</html>");
+            lblBook2Info.setText("<html>Titulo: " + stock.get(cp2).getTitulo() + "<br>Autor: " + stock.get(cp2).getAutor() + " <br>ISBN: " + stock.get(cp2).getIsbn() + "<br>Precio: " + stock.get(cp2).getPrecio() + "<br>Disponibles: " + stock.get(cp2).getDisponibles() + "</html>");
+        }
+    }
+
     public Main() {
         initComponents();
-        
-        inventario = new Inventario();
-        ventas.add(new Venta(new Empleado(123, "juan", "perez", "cabo"),"10/10/2024","vendio el libro x"));
-        inventario.agregarAStock(new Libro("Un titulo","Alguien","ISBN123123",30000,100));
-        inventario.agregarAPrestamos(inventario.getStock().get(0));
     }
 
     /**
@@ -45,21 +67,22 @@ public class Main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        intFrameClientePrestamo = new javax.swing.JInternalFrame();
-        intFrameClienteCompra = new javax.swing.JInternalFrame();
         intFrameAdminVentas = new javax.swing.JInternalFrame();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        backgroundAdminPrestamos1 = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
         ventasTable = new javax.swing.JTable();
+        btnDetallesVenta = new javax.swing.JButton();
         intFrameAdminPrestamos = new javax.swing.JInternalFrame();
+        backgroundAdminPrestamos = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         prestamosTable = new javax.swing.JTable();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        btnEliminarPrestamo = new javax.swing.JButton();
         intFrameAdminInventario = new javax.swing.JInternalFrame();
+        backgroundAdminInventario = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         inventarioTable = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnAgregarStock = new javax.swing.JButton();
+        btnEliminarStock = new javax.swing.JButton();
         intFrameCliente = new javax.swing.JInternalFrame();
         backgroundCliente = new javax.swing.JPanel();
         panelBookClient = new javax.swing.JPanel();
@@ -85,31 +108,10 @@ public class Main extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Lectura sin fin");
-        setAlwaysOnTop(true);
         setMinimumSize(new java.awt.Dimension(1344, 756));
         setUndecorated(true);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        intFrameClientePrestamo.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        intFrameClientePrestamo.setClosable(true);
-        intFrameClientePrestamo.setTitle("Prestar");
-        intFrameClientePrestamo.setMaximumSize(new java.awt.Dimension(700, 450));
-        intFrameClientePrestamo.setMinimumSize(new java.awt.Dimension(700, 450));
-        intFrameClientePrestamo.setPreferredSize(new java.awt.Dimension(700, 450));
-        intFrameClientePrestamo.setVisible(false);
-        intFrameClientePrestamo.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(intFrameClientePrestamo, new org.netbeans.lib.awtextra.AbsoluteConstraints(322, 155, 700, 450));
-
-        intFrameClienteCompra.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        intFrameClienteCompra.setClosable(true);
-        intFrameClienteCompra.setTitle("Comprar");
-        intFrameClienteCompra.setMaximumSize(new java.awt.Dimension(700, 450));
-        intFrameClienteCompra.setMinimumSize(new java.awt.Dimension(700, 450));
-        intFrameClienteCompra.setPreferredSize(new java.awt.Dimension(700, 450));
-        intFrameClienteCompra.setVisible(false);
-        intFrameClienteCompra.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(intFrameClienteCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(322, 155, 700, 450));
 
         intFrameAdminVentas.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         intFrameAdminVentas.setClosable(true);
@@ -120,24 +122,71 @@ public class Main extends javax.swing.JFrame {
         intFrameAdminVentas.setVisible(false);
         intFrameAdminVentas.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jScrollPane1.setMaximumSize(new java.awt.Dimension(500, 350));
-        jScrollPane1.setMinimumSize(new java.awt.Dimension(500, 350));
-        jScrollPane1.setPreferredSize(new java.awt.Dimension(500, 350));
+        backgroundAdminPrestamos1.setBackground(new java.awt.Color(255, 189, 89));
+        backgroundAdminPrestamos1.setMaximumSize(new java.awt.Dimension(700, 430));
+        backgroundAdminPrestamos1.setMinimumSize(new java.awt.Dimension(700, 430));
+        backgroundAdminPrestamos1.setPreferredSize(new java.awt.Dimension(700, 430));
+        backgroundAdminPrestamos1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jScrollPane4.setFocusable(false);
+        jScrollPane4.setMaximumSize(new java.awt.Dimension(500, 250));
+        jScrollPane4.setMinimumSize(new java.awt.Dimension(500, 250));
+        jScrollPane4.setPreferredSize(new java.awt.Dimension(500, 250));
+
+        ventasTable.setBackground(new java.awt.Color(255, 247, 177));
+        ventasTable.setForeground(new java.awt.Color(73, 66, 60));
         ventasTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID Comprador", "ID Vendedor", "Libro", "Fecha"
             }
-        ));
-        jScrollPane1.setViewportView(ventasTable);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.Integer.class, java.lang.Long.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
 
-        intFrameAdminVentas.getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, 500, 350));
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        ventasTable.setGridColor(new java.awt.Color(255, 247, 177));
+        ventasTable.setSelectionBackground(new java.awt.Color(132, 79, 79));
+        ventasTable.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        ventasTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        ventasTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        ventasTable.setShowGrid(true);
+        jScrollPane4.setViewportView(ventasTable);
+
+        backgroundAdminPrestamos1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, 500, 250));
+
+        btnDetallesVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/FrontEnd/media/btnDetalles.png"))); // NOI18N
+        btnDetallesVenta.setFocusable(false);
+        btnDetallesVenta.setMaximumSize(new java.awt.Dimension(140, 50));
+        btnDetallesVenta.setMinimumSize(new java.awt.Dimension(140, 50));
+        btnDetallesVenta.setPreferredSize(new java.awt.Dimension(75, 25));
+        btnDetallesVenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDetallesVentaActionPerformed(evt);
+            }
+        });
+        backgroundAdminPrestamos1.add(btnDetallesVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(245, 310, 210, 80));
+
+        intFrameAdminVentas.getContentPane().add(backgroundAdminPrestamos1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 430));
 
         getContentPane().add(intFrameAdminVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(322, 155, 700, 450));
 
@@ -150,37 +199,65 @@ public class Main extends javax.swing.JFrame {
         intFrameAdminPrestamos.setVisible(false);
         intFrameAdminPrestamos.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        backgroundAdminPrestamos.setBackground(new java.awt.Color(255, 189, 89));
+        backgroundAdminPrestamos.setMaximumSize(new java.awt.Dimension(700, 430));
+        backgroundAdminPrestamos.setMinimumSize(new java.awt.Dimension(700, 430));
+        backgroundAdminPrestamos.setPreferredSize(new java.awt.Dimension(700, 430));
+        backgroundAdminPrestamos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         jScrollPane3.setFocusable(false);
         jScrollPane3.setMaximumSize(new java.awt.Dimension(500, 250));
         jScrollPane3.setMinimumSize(new java.awt.Dimension(500, 250));
         jScrollPane3.setPreferredSize(new java.awt.Dimension(500, 250));
 
+        prestamosTable.setBackground(new java.awt.Color(255, 247, 177));
+        prestamosTable.setForeground(new java.awt.Color(73, 66, 60));
         prestamosTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Id Cliente", "Nombre Cliente", "Titulo", "Autor", "ISBN", "Precio"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Long.class, java.lang.Double.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        prestamosTable.setGridColor(new java.awt.Color(255, 247, 177));
+        prestamosTable.setSelectionBackground(new java.awt.Color(132, 79, 79));
+        prestamosTable.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        prestamosTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        prestamosTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        prestamosTable.setShowGrid(true);
         jScrollPane3.setViewportView(prestamosTable);
 
-        intFrameAdminPrestamos.getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, 500, 250));
+        backgroundAdminPrestamos.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, 500, 250));
 
-        jButton5.setText("Precio");
-        jButton5.setMaximumSize(new java.awt.Dimension(140, 50));
-        jButton5.setMinimumSize(new java.awt.Dimension(140, 50));
-        jButton5.setPreferredSize(new java.awt.Dimension(140, 50));
-        intFrameAdminPrestamos.getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(365, 320, 140, 50));
+        btnEliminarPrestamo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/FrontEnd/media/btnEliminar.png"))); // NOI18N
+        btnEliminarPrestamo.setFocusable(false);
+        btnEliminarPrestamo.setMaximumSize(new java.awt.Dimension(140, 50));
+        btnEliminarPrestamo.setMinimumSize(new java.awt.Dimension(140, 50));
+        btnEliminarPrestamo.setPreferredSize(new java.awt.Dimension(140, 50));
+        btnEliminarPrestamo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarPrestamoActionPerformed(evt);
+            }
+        });
+        backgroundAdminPrestamos.add(btnEliminarPrestamo, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 310, 210, 80));
 
-        jButton6.setText("Disponibilidad");
-        jButton6.setMaximumSize(new java.awt.Dimension(140, 50));
-        jButton6.setMinimumSize(new java.awt.Dimension(140, 50));
-        jButton6.setPreferredSize(new java.awt.Dimension(75, 25));
-        intFrameAdminPrestamos.getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(195, 320, 140, 50));
+        intFrameAdminPrestamos.getContentPane().add(backgroundAdminPrestamos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 430));
 
         getContentPane().add(intFrameAdminPrestamos, new org.netbeans.lib.awtextra.AbsoluteConstraints(322, 155, 700, 450));
 
@@ -193,37 +270,78 @@ public class Main extends javax.swing.JFrame {
         intFrameAdminInventario.setVisible(false);
         intFrameAdminInventario.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        backgroundAdminInventario.setBackground(new java.awt.Color(255, 189, 89));
+        backgroundAdminInventario.setMaximumSize(new java.awt.Dimension(700, 430));
+        backgroundAdminInventario.setMinimumSize(new java.awt.Dimension(700, 430));
+        backgroundAdminInventario.setPreferredSize(new java.awt.Dimension(700, 430));
+        backgroundAdminInventario.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jScrollPane2.setBackground(new java.awt.Color(132, 79, 79));
         jScrollPane2.setFocusable(false);
         jScrollPane2.setMaximumSize(new java.awt.Dimension(500, 250));
         jScrollPane2.setMinimumSize(new java.awt.Dimension(500, 250));
         jScrollPane2.setPreferredSize(new java.awt.Dimension(500, 250));
 
+        inventarioTable.setBackground(new java.awt.Color(255, 247, 177));
+        inventarioTable.setForeground(new java.awt.Color(73, 66, 60));
         inventarioTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Titulo", "Autor", "ISBN", "Precio", "Disponibles"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.Long.class, java.lang.Double.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        inventarioTable.setGridColor(new java.awt.Color(255, 247, 177));
+        inventarioTable.setSelectionBackground(new java.awt.Color(132, 79, 79));
+        inventarioTable.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        inventarioTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        inventarioTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        inventarioTable.setShowGrid(true);
         jScrollPane2.setViewportView(inventarioTable);
 
-        intFrameAdminInventario.getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, 500, 250));
+        backgroundAdminInventario.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, 500, 250));
 
-        jButton1.setText("Precio");
-        jButton1.setMaximumSize(new java.awt.Dimension(140, 50));
-        jButton1.setMinimumSize(new java.awt.Dimension(140, 50));
-        jButton1.setPreferredSize(new java.awt.Dimension(140, 50));
-        intFrameAdminInventario.getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(365, 320, 140, 50));
+        btnAgregarStock.setIcon(new javax.swing.ImageIcon(getClass().getResource("/FrontEnd/media/btnAgregar.png"))); // NOI18N
+        btnAgregarStock.setFocusable(false);
+        btnAgregarStock.setMaximumSize(new java.awt.Dimension(140, 50));
+        btnAgregarStock.setMinimumSize(new java.awt.Dimension(140, 50));
+        btnAgregarStock.setPreferredSize(new java.awt.Dimension(75, 25));
+        btnAgregarStock.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarStockActionPerformed(evt);
+            }
+        });
+        backgroundAdminInventario.add(btnAgregarStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 310, 210, 80));
 
-        jButton2.setText("Disponibilidad");
-        jButton2.setMaximumSize(new java.awt.Dimension(140, 50));
-        jButton2.setMinimumSize(new java.awt.Dimension(140, 50));
-        jButton2.setPreferredSize(new java.awt.Dimension(75, 25));
-        intFrameAdminInventario.getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(195, 320, 140, 50));
+        btnEliminarStock.setIcon(new javax.swing.ImageIcon(getClass().getResource("/FrontEnd/media/btnEliminar.png"))); // NOI18N
+        btnEliminarStock.setFocusable(false);
+        btnEliminarStock.setMaximumSize(new java.awt.Dimension(140, 50));
+        btnEliminarStock.setMinimumSize(new java.awt.Dimension(140, 50));
+        btnEliminarStock.setPreferredSize(new java.awt.Dimension(140, 50));
+        btnEliminarStock.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarStockActionPerformed(evt);
+            }
+        });
+        backgroundAdminInventario.add(btnEliminarStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 310, 210, 80));
+
+        intFrameAdminInventario.getContentPane().add(backgroundAdminInventario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 430));
 
         getContentPane().add(intFrameAdminInventario, new org.netbeans.lib.awtextra.AbsoluteConstraints(322, 155, 700, 450));
 
@@ -247,11 +365,6 @@ public class Main extends javax.swing.JFrame {
         panelBookClient.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
         panelBookClient.setMaximumSize(new java.awt.Dimension(210, 300));
         panelBookClient.setPreferredSize(new java.awt.Dimension(210, 300));
-        panelBookClient.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                panelBookClientMouseClicked(evt);
-            }
-        });
         panelBookClient.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblBookClientInfo.setBackground(new java.awt.Color(73, 66, 60));
@@ -444,6 +557,11 @@ public class Main extends javax.swing.JFrame {
         btnNextBook.setMinimumSize(new java.awt.Dimension(80, 230));
         btnNextBook.setName(""); // NOI18N
         btnNextBook.setPreferredSize(new java.awt.Dimension(80, 230));
+        btnNextBook.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNextBookActionPerformed(evt);
+            }
+        });
         background.add(btnNextBook, new org.netbeans.lib.awtextra.AbsoluteConstraints(1082, 300, 80, 230));
 
         btnAdminConfig.setIcon(new javax.swing.ImageIcon(getClass().getResource("/FrontEnd/media/btnAdmin.png"))); // NOI18N
@@ -472,13 +590,28 @@ public class Main extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPreviousBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreviousBookActionPerformed
-        // TODO add your handling code here:
+        if (cp1 < 0) {
+            cp1 = 0;
+            cp2 = 1;
+            setPages();
+        } else if (cp1 == 0 && cp2 == 1) {
+            cp2 = stock.size() - 1;
+            cp1 = stock.size() - 2;
+            setPages();
+        } else if (cp1 == 1 && cp2 == 2) {
+            cp1 = stock.size() - 1;
+            cp2 = 0;
+            setPages();
+        } else if (cp1 == stock.size() - 1 && cp2 == 0) {
+            cp1 = 2;
+            cp2 = 3;
+            setPages();
+        } else {
+            cp1 -= 2;
+            cp2 -= 2;
+            setPages();
+        }
     }//GEN-LAST:event_btnPreviousBookActionPerformed
-
-    private void panelBook2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBook2MouseClicked
-        intFrameCliente.setVisible(!intFrameCliente.isVisible());
-        lblBookClientInfo.setText(lblBook2Info.getText());
-    }//GEN-LAST:event_panelBook2MouseClicked
 
     private void panelBook1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBook1MouseClicked
         intFrameCliente.setVisible(!intFrameCliente.isVisible());
@@ -491,11 +624,11 @@ public class Main extends javax.swing.JFrame {
 
     private void btnAdminVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminVentasActionPerformed
         intFrameAdminVentas.setVisible(!intFrameAdminVentas.isVisible());
-        writeVentasTable(ventasTable,ventas);
+        writeVentasTable(ventasTable, ventas);
         intFrameAdminConfig.setVisible(false);
     }//GEN-LAST:event_btnAdminVentasActionPerformed
-    
-    public void writeLibroTable(javax.swing.JTable table, ArrayList<Libro> list){
+
+    public void writeLibroTable(javax.swing.JTable table, ArrayList<Libro> list) {
         DefaultTableModel modelo;
         modelo = new DefaultTableModel();
         modelo.addColumn("Titulo");
@@ -504,34 +637,66 @@ public class Main extends javax.swing.JFrame {
         modelo.addColumn("Precio");
         modelo.addColumn("Disponibles");
         table.setModel(modelo);
-        for (Libro lb: list){
+        for (Libro lb : list) {
             modelo.addRow(new Object[]{lb.getTitulo(), lb.getAutor(), lb.getIsbn(), lb.getPrecio(), lb.getDisponibles()});
         }
     }
-    public void writeVentasTable(javax.swing.JTable table, ArrayList<Venta> list){
+
+    public void writeVentasTable(javax.swing.JTable table, ArrayList<Venta> list) {
         DefaultTableModel modelo;
         modelo = new DefaultTableModel();
-        modelo.addColumn("Vendedor");
+        modelo.addColumn("Cliente");
+        modelo.addColumn("Gestor");
+        modelo.addColumn("Libro");
         modelo.addColumn("Fecha");
-        modelo.addColumn("Detalles");
         table.setModel(modelo);
-        for (Venta v: list){
-            modelo.addRow(new Object[]{v.getVendedor().getNombre()+" "+v.getVendedor().getApellido(),v.getFecha(),v.getDetalles()});
+        for (Venta v : list) {
+            modelo.addRow(new Object[]{v.getPedido().getComprador().getId(), v.getPedido().getGestor().getId(), v.getLibro().getIsbn(), v.getFecha()});
+        }
+    }
+
+    public void writePrestamosTable(javax.swing.JTable table, ArrayList<Cliente> list) {
+        DefaultTableModel modelo;
+        modelo = new DefaultTableModel();
+        modelo.addColumn("Id Cliente");
+        modelo.addColumn("nombre Cliente");
+        modelo.addColumn("Titulo");
+        modelo.addColumn("Autor");
+        modelo.addColumn("ISBN");
+        modelo.addColumn("Precio");
+        table.setModel(modelo);
+        for (Cliente cli : list) {
+            for (Libro lib : cli.getHistorialPrestamos()) {
+                modelo.addRow(new Object[]{cli.getId(), cli.getNombre() + " " + cli.getApellido(), lib.getTitulo(), lib.getAutor(), lib.getIsbn(), lib.getPrecio()});
+            }
         }
     }
     private void btnAdminInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminInventarioActionPerformed
         intFrameAdminInventario.setVisible(!intFrameAdminInventario.isVisible());
-        writeLibroTable(inventarioTable,inventario.getStock());
+        writeLibroTable(inventarioTable, inventario.getStock());
         intFrameAdminConfig.setVisible(false);
     }//GEN-LAST:event_btnAdminInventarioActionPerformed
 
-    private void panelBookClientMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBookClientMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_panelBookClientMouseClicked
-
     private void btnPrestarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrestarActionPerformed
-        intFrameClientePrestamo.setVisible(!intFrameClientePrestamo.isVisible());
-        intFrameCliente.setVisible(false);
+        Notificacion nf = new NotificacionSMS();
+        try {
+            Cliente cli = new Cliente(Integer.parseInt(JOptionPane.showInputDialog(null, "ID de cliente: ", "Cliente", 3)), JOptionPane.showInputDialog(null, "Nombre de cliente: ", "Cliente", 3), JOptionPane.showInputDialog(null, "Apellido de cliente: ", "Cliente", 3), new ArrayList<Libro>());
+            clientes.add(cli);
+            Libro lib = new Libro();
+            for (Libro l : stock) {
+                if (lblBookClientInfo.getText().contains("ISBN: " + l.getIsbn())) {
+                    lib = l;
+                }
+            }
+            inventario.agregarAPrestamos(lib);
+            cli.getHistorialPrestamos().add(lib);
+            intFrameCliente.dispose();
+            setPages();
+            writePrestamosTable(prestamosTable, clientes);
+            nf.enviarMensaje("Prestamo registrado correctamente");
+        } catch (Exception e) {
+            nf.enviarMensaje("Error al registrar el prestamo");
+        }
     }//GEN-LAST:event_btnPrestarActionPerformed
 
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
@@ -540,14 +705,111 @@ public class Main extends javax.swing.JFrame {
 
     private void btnAdminPrestamosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminPrestamosActionPerformed
         intFrameAdminPrestamos.setVisible(!intFrameAdminPrestamos.isVisible());
-        writeLibroTable(prestamosTable, inventario.getPrestamos());
+        writePrestamosTable(prestamosTable, clientes);
         intFrameAdminConfig.setVisible(false);
     }//GEN-LAST:event_btnAdminPrestamosActionPerformed
 
     private void btnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarActionPerformed
-        intFrameClienteCompra.setVisible(!intFrameClienteCompra.isVisible());
-        intFrameCliente.setVisible(false);
+        Notificacion nf = new NotificacionEmail();
+        try {
+            Cliente cli = new Cliente(Integer.parseInt(JOptionPane.showInputDialog(null, "ID de cliente: ", "Cliente", 3)), JOptionPane.showInputDialog(null, "Nombre de cliente: ", "Cliente", 3), JOptionPane.showInputDialog(null, "Apellido de cliente: ", "Cliente", 3), new ArrayList<Libro>());
+            Empleado emp = new Empleado(Integer.parseInt(JOptionPane.showInputDialog(null, "ID de gestor: ", "Gestor", 3)), JOptionPane.showInputDialog(null, "Nombre de gestor: ", "Gestor", 3), JOptionPane.showInputDialog(null, "Apellido de gestor: ", "Gestor", 3), "gestor");
+            Libro lib = new Libro();
+            for (Libro l : stock) {
+                if (lblBookClientInfo.getText().contains("ISBN: " + l.getIsbn())) {
+                    lib = l;
+                }
+            }
+            Venta ven = new Venta(cli, emp, new ArrayList<DetallePedido>(), lib);
+            ventas.add(ven);
+            inventario.eliminarDeStock(lib);
+            intFrameCliente.dispose();
+            setPages();
+            writeVentasTable(ventasTable, ventas);
+            nf.enviarMensaje("Venta registrada correctamente");
+        } catch (Exception e) {
+            nf.enviarMensaje("Error al registrar la venta");
+        }
     }//GEN-LAST:event_btnComprarActionPerformed
+
+    private void btnDetallesVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetallesVentaActionPerformed
+        for (int i = 0; i < ventas.size(); i++) {
+            if (ventas.get(i).getPedido().getComprador().getId() == (int) ventasTable.getModel().getValueAt(ventasTable.getSelectedRow(), 0) && ventas.get(i).getPedido().getGestor().getId() == (int) ventasTable.getModel().getValueAt(ventasTable.getSelectedRow(), 1) && ventas.get(i).getLibro().getIsbn() == (long)(ventasTable.getModel().getValueAt(ventasTable.getSelectedRow(), 2))) {
+                int sz = ventas.get(i).getPedido().getDetalles().size();
+                for (int j = 0; j < sz; j++) {
+                    JOptionPane.showMessageDialog(null, ventas.get(i).getPedido().getDetalles().get(j).getDetalle(), "Detalle de pedido #" + (j + 1), 1);
+                }
+            }
+        }
+    }//GEN-LAST:event_btnDetallesVentaActionPerformed
+
+    private void btnNextBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextBookActionPerformed
+        if (cp1 >= stock.size()) {
+            cp1 = 0;
+            cp2 = 1;
+            setPages();
+        } else if (cp1 == stock.size() - 3) {
+            cp1 += 2;
+            cp2 = 0;
+            setPages();
+        } else if (cp1 == stock.size() - 2 && cp2 == stock.size() - 1) {
+            cp1 = 0;
+            cp2 = 1;
+            setPages();
+        } else {
+            cp1 = cp2 + 1;
+            cp2 += 2;
+            setPages();
+        }
+    }//GEN-LAST:event_btnNextBookActionPerformed
+
+    private void btnAgregarStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarStockActionPerformed
+        try {
+            inventario.agregarAStock(new Libro(JOptionPane.showInputDialog(null, "Titulo del libro: ", "Libro", 3), JOptionPane.showInputDialog(null, "Nombre del autor: ", "Libro", 3), Long.parseLong(JOptionPane.showInputDialog(null, "ISBN: ", "Libro", 3)), Double.parseDouble(JOptionPane.showInputDialog(null, "Precio: ", "Libro", 3)), Integer.parseInt(JOptionPane.showInputDialog(null, "Cantidad de disponibles: ", "Libro", 3))));
+            writeLibroTable(inventarioTable, inventario.getStock());
+            JOptionPane.showMessageDialog(null, "Libro registrado correctamente", "Libro", 1);
+            setPages();
+            intFrameAdminInventario.setVisible(false);
+            intFrameAdminInventario.setVisible(true);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al registrar el libro", "Libro", 0);
+        }
+
+    }//GEN-LAST:event_btnAgregarStockActionPerformed
+
+    private void btnEliminarStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarStockActionPerformed
+        try {
+            inventario.getStock().remove(inventarioTable.getSelectedRow());
+            writeLibroTable(inventarioTable, inventario.getStock());
+            JOptionPane.showMessageDialog(null, "Libro eliminado correctamente", "Libro", 1);
+            setPages();
+            intFrameAdminInventario.setVisible(false);
+            intFrameAdminInventario.setVisible(true);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al eliminar el libro", "Libro", 0);
+        }
+
+    }//GEN-LAST:event_btnEliminarStockActionPerformed
+
+    private void panelBook2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBook2MouseClicked
+        intFrameCliente.setVisible(!intFrameCliente.isVisible());
+        lblBookClientInfo.setText(lblBook2Info.getText());
+    }//GEN-LAST:event_panelBook2MouseClicked
+
+    private void btnEliminarPrestamoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarPrestamoActionPerformed
+        inventario.getPrestamos().remove(prestamosTable.getSelectedRow());
+        int id = (int) prestamosTable.getModel().getValueAt(prestamosTable.getSelectedRow(), 0);
+        long isbn = (long) prestamosTable.getModel().getValueAt(prestamosTable.getSelectedRow(), 4);
+        for (int i = 0; i < clientes.size(); i++) {
+            for (int j = 0; j < clientes.get(i).getHistorialPrestamos().size(); j++) {
+                if (clientes.get(i).getId() == id && clientes.get(i).getHistorialPrestamos().get(j).getIsbn() == isbn) {
+                    clientes.get(i).getHistorialPrestamos().remove(j);
+                    break;
+                }
+            }
+        }
+        writePrestamosTable(prestamosTable, clientes);
+    }//GEN-LAST:event_btnEliminarPrestamoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -557,12 +819,12 @@ public class Main extends javax.swing.JFrame {
         SS.setLocationRelativeTo(null);
         SS.setVisible(true);
         try {
-            Thread.sleep(3000);
+            Thread.sleep(0);
         } catch (InterruptedException ex) {
             System.out.println("Chale Mi casita");
         }
         SS.dispose();
-        
+
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -585,93 +847,36 @@ public class Main extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 JFrame mainForm = new Main();
                 mainForm.setLocationRelativeTo(null);
+
                 mainForm.setVisible(true);
             }
         });
-        
-        
-        
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel background;
     private javax.swing.JPanel backgroundAdminConfig;
+    private javax.swing.JPanel backgroundAdminInventario;
+    private javax.swing.JPanel backgroundAdminPrestamos;
+    private javax.swing.JPanel backgroundAdminPrestamos1;
     private javax.swing.JPanel backgroundCliente;
     private javax.swing.JButton btnAdminConfig;
     private javax.swing.JButton btnAdminInventario;
     private javax.swing.JButton btnAdminPrestamos;
     private javax.swing.JButton btnAdminVentas;
+    private javax.swing.JButton btnAgregarStock;
     private javax.swing.JButton btnClose;
     private javax.swing.JButton btnComprar;
+    private javax.swing.JButton btnDetallesVenta;
+    private javax.swing.JButton btnEliminarPrestamo;
+    private javax.swing.JButton btnEliminarStock;
     private javax.swing.JButton btnNextBook;
     private javax.swing.JButton btnPrestar;
     private javax.swing.JButton btnPreviousBook;
@@ -680,16 +885,10 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JInternalFrame intFrameAdminPrestamos;
     private javax.swing.JInternalFrame intFrameAdminVentas;
     private javax.swing.JInternalFrame intFrameCliente;
-    private javax.swing.JInternalFrame intFrameClienteCompra;
-    private javax.swing.JInternalFrame intFrameClientePrestamo;
     private javax.swing.JTable inventarioTable;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JLabel lblBook1Info;
     private javax.swing.JLabel lblBook2Info;
     private javax.swing.JLabel lblBookClientInfo;

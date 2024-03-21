@@ -4,30 +4,62 @@
  */
 package sistema.de.gestion.de.libreria.compusoft;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author jodav
  */
 public class Venta {
-    private Empleado vendedor;
+
+    private Pedido pedido;
+    private Libro libro;
     private String fecha;
-    private String detalles;
 
     public Venta() {
     }
 
-    public Venta (Empleado vendedor, String fecha, String detalles) {
-        this.vendedor = vendedor;
+    public Venta(Pedido pedido, Libro libro, String fecha) {
+        this.pedido = pedido;
+        this.libro = libro;
         this.fecha = fecha;
-        this.detalles = detalles;
     }
 
-    public Empleado getVendedor() {
-        return vendedor;
+    public Venta(Cliente comprador, Empleado gestor, ArrayList<DetallePedido> detalles, Libro libro) {
+        int c = 1;
+        detalles.add(new DetallePedido(JOptionPane.showInputDialog(null, "Ingrese detalle de pedido #" + c + ": ", "Detalle de Pedido", 3)));
+        c++;
+        while (true) {
+            if (JOptionPane.showConfirmDialog(null, "Desea ingresar Detalle de Pedido?", "Continuar", JOptionPane.YES_NO_OPTION, 3) == 0) {
+                detalles.add(new DetallePedido(JOptionPane.showInputDialog(null, "Ingrese detalle de pedido #" + c + ": ", "Detalle de Pedido", 3)));
+                c++;
+            } else {
+                break;
+            }
+        }
+        pedido = new Pedido(comprador, gestor, detalles);
+        this.libro = libro;
+        this.fecha = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
 
-    public void setVendedor(Empleado vendedor) {
-        this.vendedor = vendedor;
+    public Pedido getPedido() {
+        return pedido;
+    }
+
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
+    }
+
+    public Libro getLibro() {
+        return libro;
+    }
+
+    public void setLibro(Libro libro) {
+        this.libro = libro;
     }
 
     public String getFecha() {
@@ -38,11 +70,4 @@ public class Venta {
         this.fecha = fecha;
     }
 
-    public String getDetalles() {
-        return detalles;
-    }
-
-    public void setDetalles(String detalles) {
-        this.detalles = detalles;
-    }
 }

@@ -4,14 +4,22 @@ public class Libro implements Consultable {
 
     private String titulo;
     private String autor;
-    private String isbn;
+    private long isbn;
     private double precio;
     private int disponibles;
 
     public Libro() {
     }
 
-    public Libro(String titulo, String autor, String isbn, double precio, int disponibles) {
+    public Libro(String titulo, String autor, long isbn, double precio) {
+        this.titulo = titulo;
+        this.autor = autor;
+        this.isbn = isbn;
+        this.precio = precio;
+        disponibles = 1;
+    }
+    
+    public Libro(String titulo, String autor, long isbn, double precio, int disponibles) {
         this.titulo = titulo;
         this.autor = autor;
         this.isbn = isbn;
@@ -19,13 +27,13 @@ public class Libro implements Consultable {
         this.disponibles = disponibles;
     }
     
-    public Libro(String titulo, String autor, String isbn, double precio, Inventario inventario) {
+    public Libro(String titulo, String autor, long isbn, double precio, Inventario inventario) {
         this.titulo = titulo;
         this.autor = autor;
         this.isbn = isbn;
         this.precio = precio;
         for (Libro libro : inventario.getStock()) {
-            if (libro.getIsbn().equals(this.isbn)){
+            if (libro.getIsbn() == this.isbn){
                 disponibles ++;
             }
         }
@@ -47,11 +55,11 @@ public class Libro implements Consultable {
         this.autor = autor;
     }
 
-    public String getIsbn() {
+    public long getIsbn() {
         return isbn;
     }
 
-    public void setIsbn(String isbn) {
+    public void setIsbn(long isbn) {
         this.isbn = isbn;
     }
 
