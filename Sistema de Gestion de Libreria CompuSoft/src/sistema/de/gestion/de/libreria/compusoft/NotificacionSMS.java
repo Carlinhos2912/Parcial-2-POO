@@ -15,7 +15,17 @@ public class NotificacionSMS extends Notificacion {
     private int numero;
 
     public NotificacionSMS() {
-        numero = Integer.parseInt(JOptionPane.showInputDialog(null, "Numero telefono del cliente: ", "SMS", 3));
+        String n;
+        boolean valid = false;
+        do{
+            n = JOptionPane.showInputDialog(null, "Numero telefono del cliente: ", "SMS", 3);
+            try {
+                numero = Integer.parseInt(n);
+                valid = true;
+            } catch (Exception e) {
+                
+            }
+        } while (n.isBlank() || !valid);
     }
 
     public NotificacionSMS(int numero) {
