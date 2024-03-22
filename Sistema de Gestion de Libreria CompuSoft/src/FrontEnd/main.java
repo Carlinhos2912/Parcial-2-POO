@@ -614,8 +614,10 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPreviousBookActionPerformed
 
     private void panelBook1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBook1MouseClicked
-        intFrameCliente.setVisible(!intFrameCliente.isVisible());
-        lblBookClientInfo.setText(lblBook1Info.getText());
+        if (!inventario.getStock().isEmpty()){
+            intFrameCliente.setVisible(!intFrameCliente.isVisible());
+            lblBookClientInfo.setText(lblBook1Info.getText());
+        }
     }//GEN-LAST:event_panelBook1MouseClicked
 
     private void btnAdminConfigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminConfigActionPerformed
@@ -680,20 +682,34 @@ public class Main extends javax.swing.JFrame {
     private void btnPrestarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrestarActionPerformed
         Notificacion nf = new NotificacionSMS();
         try {
-            Cliente cli = new Cliente(Integer.parseInt(JOptionPane.showInputDialog(null, "ID de cliente: ", "Cliente", 3)), JOptionPane.showInputDialog(null, "Nombre de cliente: ", "Cliente", 3), JOptionPane.showInputDialog(null, "Apellido de cliente: ", "Cliente", 3), new ArrayList<Libro>());
-            clientes.add(cli);
-            Libro lib = new Libro();
-            for (Libro l : stock) {
-                if (lblBookClientInfo.getText().contains("ISBN: " + l.getIsbn())) {
-                    lib = l;
+            int id = Integer.parseInt(JOptionPane.showInputDialog(null, "ID de cliente: ", "Cliente", 3));
+            String name = JOptionPane.showInputDialog(null, "Nombre de cliente: ", "Cliente", 3);
+            if (name != null && !name.isBlank()){
+                
+                String ap = JOptionPane.showInputDialog(null, "Apellido de cliente: ", "Cliente", 3); 
+                if (ap != null && !ap.isBlank()){
+                    Cliente cli = new Cliente(id,name,ap,new ArrayList<Libro>());
+                
+                    clientes.add(cli);
+                    Libro lib = new Libro();
+                    for (Libro l : stock) {
+                        if (lblBookClientInfo.getText().contains("ISBN: " + l.getIsbn())) {
+                            lib = l;
+                        }
+                    }
+                    inventario.agregarAPrestamos(lib);
+                    cli.getHistorialPrestamos().add(lib);
+                    intFrameCliente.dispose();
+                    setPages();
+                    writePrestamosTable(prestamosTable, clientes);
+                    nf.enviarMensaje("Prestamo registrado correctamente");
+                } else {
+                    nf.enviarMensaje("Se ha cancelado el prestamo");
                 }
+            } else {
+                nf.enviarMensaje("Se ha cancelado el prestamo");
             }
-            inventario.agregarAPrestamos(lib);
-            cli.getHistorialPrestamos().add(lib);
-            intFrameCliente.dispose();
-            setPages();
-            writePrestamosTable(prestamosTable, clientes);
-            nf.enviarMensaje("Prestamo registrado correctamente");
+            
         } catch (Exception e) {
             nf.enviarMensaje("Error al registrar el prestamo");
         }
@@ -765,12 +781,18 @@ public class Main extends javax.swing.JFrame {
 
     private void btnAgregarStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarStockActionPerformed
         try {
-            inventario.agregarAStock(new Libro(JOptionPane.showInputDialog(null, "Titulo del libro: ", "Libro", 3), JOptionPane.showInputDialog(null, "Nombre del autor: ", "Libro", 3), Long.parseLong(JOptionPane.showInputDialog(null, "ISBN: ", "Libro", 3)), Double.parseDouble(JOptionPane.showInputDialog(null, "Precio: ", "Libro", 3)), Integer.parseInt(JOptionPane.showInputDialog(null, "Cantidad de disponibles: ", "Libro", 3))));
-            writeLibroTable(inventarioTable, inventario.getStock());
-            JOptionPane.showMessageDialog(null, "Libro registrado correctamente", "Libro", 1);
-            setPages();
-            intFrameAdminInventario.setVisible(false);
-            intFrameAdminInventario.setVisible(true);
+            Libro lb = new Libro(JOptionPane.showInputDialog(null, "Titulo del libro: ", "Libro", 3), JOptionPane.showInputDialog(null, "Nombre del autor: ", "Libro", 3), Long.parseLong(JOptionPane.showInputDialog(null, "ISBN: ", "Libro", 3)), Double.parseDouble(JOptionPane.showInputDialog(null, "Precio: ", "Libro", 3)), Integer.parseInt(JOptionPane.showInputDialog(null, "Cantidad de disponibles: ", "Libro", 3)));
+            if (lb.getDisponibles() >= 0 && lb.getPrecio() >= 0 && lb.getIsbn() >= 0 && !lb.getAutor().isBlank() && !lb.getTitulo().isBlank()){
+                inventario.agregarAStock(lb);
+            
+                writeLibroTable(inventarioTable, inventario.getStock());
+                JOptionPane.showMessageDialog(null, "Libro registrado correctamente", "Libro", 1);
+                setPages();
+                intFrameAdminInventario.setVisible(false);
+                intFrameAdminInventario.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "Error, uno de los campos no es valido", "Libro", 0);
+            }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al registrar el libro", "Libro", 0);
         }
@@ -792,23 +814,27 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarStockActionPerformed
 
     private void panelBook2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBook2MouseClicked
-        intFrameCliente.setVisible(!intFrameCliente.isVisible());
-        lblBookClientInfo.setText(lblBook2Info.getText());
+        if (inventario.getStock().size() > 1){
+            intFrameCliente.setVisible(!intFrameCliente.isVisible());
+            lblBookClientInfo.setText(lblBook2Info.getText());
+        }
     }//GEN-LAST:event_panelBook2MouseClicked
 
     private void btnEliminarPrestamoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarPrestamoActionPerformed
-        inventario.getPrestamos().remove(prestamosTable.getSelectedRow());
-        int id = (int) prestamosTable.getModel().getValueAt(prestamosTable.getSelectedRow(), 0);
-        long isbn = (long) prestamosTable.getModel().getValueAt(prestamosTable.getSelectedRow(), 4);
-        for (int i = 0; i < clientes.size(); i++) {
-            for (int j = 0; j < clientes.get(i).getHistorialPrestamos().size(); j++) {
-                if (clientes.get(i).getId() == id && clientes.get(i).getHistorialPrestamos().get(j).getIsbn() == isbn) {
-                    clientes.get(i).getHistorialPrestamos().remove(j);
-                    break;
+        if (prestamosTable.getSelectedRow() != -1){
+            inventario.getPrestamos().remove(prestamosTable.getSelectedRow());
+            int id = (int) prestamosTable.getModel().getValueAt(prestamosTable.getSelectedRow(), 0);
+            long isbn = (long) prestamosTable.getModel().getValueAt(prestamosTable.getSelectedRow(), 4);
+            for (int i = 0; i < clientes.size(); i++) {
+                for (int j = 0; j < clientes.get(i).getHistorialPrestamos().size(); j++) {
+                    if (clientes.get(i).getId() == id && clientes.get(i).getHistorialPrestamos().get(j).getIsbn() == isbn) {
+                        clientes.get(i).getHistorialPrestamos().remove(j);
+                        break;
+                    }
                 }
             }
+            writePrestamosTable(prestamosTable, clientes);
         }
-        writePrestamosTable(prestamosTable, clientes);
     }//GEN-LAST:event_btnEliminarPrestamoActionPerformed
 
     /**
