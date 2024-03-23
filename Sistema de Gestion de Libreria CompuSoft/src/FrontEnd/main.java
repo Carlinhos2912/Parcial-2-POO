@@ -594,7 +594,7 @@ public class Main extends javax.swing.JFrame {
             cp1 = 0;
             cp2 = 1;
             setPages();
-        } else if (cp1 == 0 && cp2 == 1) {
+        } else if (cp1 == 0 && cp2 == 1 && stock.size() >= 2) {
             cp2 = stock.size() - 1;
             cp1 = stock.size() - 2;
             setPages();
@@ -605,6 +605,10 @@ public class Main extends javax.swing.JFrame {
         } else if (cp1 == stock.size() - 1 && cp2 == 0) {
             cp1 = 2;
             cp2 = 3;
+            setPages();
+        } else if (cp1 <= stock.size() || cp2 <= stock.size() || stock.size() < 2){
+            cp1 = 0;
+            cp2 = 1;
             setPages();
         } else {
             cp1 -= 2;
@@ -760,7 +764,7 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDetallesVentaActionPerformed
 
     private void btnNextBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextBookActionPerformed
-        if (cp1 >= stock.size()) {
+        if (cp1 >= stock.size() || cp2 >= stock.size()) {
             cp1 = 0;
             cp2 = 1;
             setPages();
@@ -845,7 +849,7 @@ public class Main extends javax.swing.JFrame {
         SS.setLocationRelativeTo(null);
         SS.setVisible(true);
         try {
-            Thread.sleep(0);
+            Thread.sleep(3000);
         } catch (InterruptedException ex) {
             System.out.println("Chale Mi casita");
         }
