@@ -8,15 +8,15 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import sistema.de.gestion.de.libreria.compusoft.Cliente;
-import sistema.de.gestion.de.libreria.compusoft.DetallePedido;
-import sistema.de.gestion.de.libreria.compusoft.Empleado;
-import sistema.de.gestion.de.libreria.compusoft.Inventario;
-import sistema.de.gestion.de.libreria.compusoft.Libro;
-import sistema.de.gestion.de.libreria.compusoft.Notificacion;
-import sistema.de.gestion.de.libreria.compusoft.NotificacionEmail;
-import sistema.de.gestion.de.libreria.compusoft.NotificacionSMS;
-import sistema.de.gestion.de.libreria.compusoft.Venta;
+import Backend.Cliente;
+import Backend.DetallePedido;
+import Backend.Empleado;
+import Backend.Inventario;
+import Backend.Libro;
+import Backend.Notificacion;
+import Backend.NotificacionEmail;
+import Backend.NotificacionSMS;
+import Backend.Venta;
 
 /**
  *
